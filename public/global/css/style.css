@@ -1,0 +1,282 @@
+/*================================================================================
+    Item Name: Modern Admin - Clean Bootstrap 4 Dashboard HTML Template
+    Version: 1.0
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+    https://themeforest.net/item/modern-admin-clean-bootstrap-4-dashboard-html-template/21430660
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+    padding: 0px;
+}
+.select2-container--classic .select2-selection--multiple, .select2-container--default .select2-selection--multiple {
+    min-height: 40px !important;
+    padding: 0 !important;
+    border: 1px solid #cacfe7 !important;
+    color: #3b4781 !important;
+    padding-top: 3px !important;
+    padding-left: 6px !important;
+}
+
+.supervisor-form-box img {
+    width: 100px;
+    margin-right: 15px;
+}
+.scroll-model-wrapper {
+    height: 400px;
+    overflow-y: scroll;
+}
+form.supervisor-form-box:hover {
+    transform: scale(1.05);
+}
+form.supervisor-form-box {
+    width: 100%;
+    transition: all 0.4s ease;
+}
+.badge-approved {
+    background-color: #28D094;
+}
+.badge-pending {
+    background-color: #FF9149;
+}
+.badge-newkamay {
+    background-color: #666EE8;
+}
+.supervisor-form-box .align-self-center img {
+    border: 2px solid #d6bc1a !important;
+    object-fit: cover !important;
+    box-shadow: 0px 1px 15px 1px rgb(44 44 44 / 38%);
+}
+.supervisor-form-box h4 {
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    justify-content: space-between;
+    display: flex;
+    border-bottom: 2px solid #d6bc1a;
+}
+.supervisor-form-box h5 {
+    font-weight: 600;
+    margin-bottom: 2px;
+    font-size: 14px;
+    margin-top: 2px;
+    border-bottom: 1px solid #d6bc1a;
+    padding-bottom: 2px;
+}
+
+.supervisor-form-box h5 span {
+    font-weight: normal;
+}
+.supervisor-form-box .btn.btn-primary{
+    display: block;
+    width: 100%;
+    padding: 10px 0px;
+    text-transform: uppercase;
+    width: 100%;
+    margin-left: auto;
+    text-align: CENTER;
+    margin-top: 30px;
+}
+.request-order-col ul.pagination{
+    text-align: center;
+    display: FLEX;
+    align-items: CENTER;
+    justify-content: CENTER;
+}
+.request-order-left {
+    border-bottom: 2px dashed #2c303b;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+}
+.alert ul {
+    margin-bottom: 0px;
+    padding-left: 20px;
+}
+input.form-control.browse.btn {
+    padding: 7.5px;
+}
+span.index-number {
+    width: 40px;
+    height: 40px;
+    background-color: #28D094;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+img.users-avatar-shadow.rounded-circle {
+    object-fit: cover;
+}
+.card-body h5 i {
+    position: relative;
+    top: 1px;
+}
+.supervisor-form-box-white{
+    box-shadow: 0px 0px 3px #00000082;
+    border-radius: 5px;
+}
+.dropdown-notification .media{
+    width: 100%;
+}
+.header-navbar .navbar-container ul.nav li .scrollable-container {
+    overflow-y: scroll;
+}
+html {
+    scroll-behavior: smooth;
+}
+.brl-0{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+.brr-0{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+span.remove {
+    display: inline-block;
+    background-color: red;
+    color: white;
+    padding: 0px 4px;
+    font-size: 14px;
+    float: right;
+}
+.form-group > .select2-container{
+    width: 100% !important;
+}
+fieldset.radio label {
+    font-size: 15px;
+}
+ul.service {
+    padding-left: 0px;
+    list-style: none;
+}
+ul.service li {
+    margin-right: 15px;
+}
+ul.service {
+    padding-left: 0px;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.highlight {
+    background-color: #fff34d;
+    -moz-border-radius: 5px; /* FF1+ */
+    -webkit-border-radius: 5px; /* Saf3-4 */
+    border-radius: 5px; /* Opera 10.5, IE 9, Saf5, Chrome */
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* FF3.5+ */
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* Saf3.0+, Chrome */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* Opera 10.5+, IE 9.0 */
+    color: black;
+}
+
+.highlight {
+    padding:1px 4px;
+    margin:0 -4px;
+}
+.color-white{
+    color: white;
+}
+
+
+ul.task_main_list {
+    padding-left: 0px;
+    list-style: none;
+    margin-bottom: 0px;
+}
+ul.task_main_list.sub_task {
+    border-bottom: 1px dashed #6b6f82;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    display: block;
+}
+ul.task_main_list.sub_task li:last-child {
+    text-align: right;
+}
+.files .dropdown-toggle::after{
+    display: none;
+}
+.task-page span {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.navbar-semi-dark .navbar-nav li {
+    line-height: 1;
+    position: relative;
+}
+#subtask_show div:first-child ul {
+    padding-top: 0px;
+}
+table#files tbody tr td:nth-child(2) {
+    max-width: 200px;
+}
+.w-200{
+    width: 200px;
+}
+table.dataTable tbody td .badge {
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+.task_main_list-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.task_main_list-wrapper span {
+    display: block;
+    margin-top: 6px;
+}
+.task_main_list-wrapper p {
+    margin-bottom: 0px;
+    font-size: 12px;
+}
+.sub_task-upper-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.brands-list span + span {
+    margin-left: 10px;
+    padding-left: 13px;
+    position: relative;
+}
+.brands-list span + span:before {
+    position: absolute;
+    width: 1px;
+    height: 15px;
+    background-color: #6B6F82;
+    content: "";
+    left: 0px;
+    top: 3px;
+}
+#files .col-md-6{
+    padding:0px
+}
+#files .col-sm-12{
+    padding:0px
+}
+.fonticon-wrap{
+    display: inline-block;
+}

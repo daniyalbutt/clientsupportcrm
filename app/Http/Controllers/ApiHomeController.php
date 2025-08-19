@@ -9,7 +9,6 @@ use DB;
 use Notification;
 use App\Models\User;
 use App\Models\Invoice;
-use App\Models\Payment;
 use App\Models\Client;
 
 use Pusher\Pusher;
@@ -20,66 +19,11 @@ class ApiHomeController extends Controller{
         if($brand_key == ''){
             return false;
         }
-        $brandKey = DB::table('brands')->where('auth_code', $brand_key)->first();
+        $brandKey = DB::table('brands')->where('auth_key', $brand_key)->first();
         if($brandKey == null){
             return false;
         }else{
             return true;
-        }
-    }
-    
-    public function submitPayment(Request $request){
-        $return_value = $this->checkAuthBrandKey($request->header('custom-auth'));
-        if($return_value){
-            $invoice = new Payment();
-            $invoice->package = $request->package_name;
-            $invoice->price = $request->amount;
-            $invoice->client_id = $request->crm_id;
-            $invoice->unique_id = bin2hex(random_bytes(14));
-            $invoice->return_response = $request->charge_object;
-            $invoice->status = 2;
-            $invoice->payment_data = json_encode($request->input());
-            $invoice->merchant = 0;
-            $invoice->is_website = 1;
-            $invoice->save();
-            return response()->json(['status' => true]);
-        }
-    }
-    
-    public function logoBrief(Request $request){
-        $return_value = $this->checkAuthBrandKey($request->header('custom-auth'));
-        if($return_value){
-            $validator = Validator::make($request->all(), [
-                'logo_info' => 'required',
-                'brief_text' => 'required',
-            ]);
-            if ($validator->fails()) {
-                return response()->json(['status' => false, 'message' => $validator->errors()]);
-            }
-            $logo_info = $request->logo_info;
-            $brief_text = $request->brief_text;
-            $selected_logo = $request->selected_logo;
-            $brief_text = $request->brief_text;
-            $brief_tagline = $request->brief_tagline;
-            $brief_description = $request->brief_description;
-            $design_concept = $request->design_concept;
-            $existing_website = $request->existing_website;
-            $client_id = $request->client_id;
-            $client_email = $request->email;
-            DB::table('logo_brief')->insert(
-                [
-                    'logo_info' => $logo_info,
-                    'selected_logo' => $selected_logo,
-                    'brief_text' => $brief_text,
-                    'brief_tagline' => $brief_tagline,
-                    'brief_description' => $brief_description,
-                    'design_concept' => $design_concept,
-                    'existing_website' => $existing_website,
-                    'client_id' => $client_id,
-                    'client_email' => $client_email
-                ]
-            );
-            return response()->json(['status' => true]);
         }
     }
 
@@ -96,8 +40,14 @@ class ApiHomeController extends Controller{
                 return response()->json(['status' => false, 'message' => $validator->errors()]);
             }
             $f_name = $request->name;
+            $l_name = null;
             $email = $request->email;
             $phone = $request->contact;
+            $url = $request->url;
+            $subject = $request->subject;
+            $services = null;
+            $message = null;
+            $created_at = $request->created_at;
             if($request->l_name != null){
                 $l_name = $request->l_name;
             }
@@ -107,23 +57,29 @@ class ApiHomeController extends Controller{
             if($request->message != null){
                 $message = $request->message;
             }
-            $brand = DB::table('brands')->where('auth_code', $request->header('custom-auth'))->first();
+            $brand = DB::table('brands')->where('auth_key', $request->header('custom-auth'))->first();
 
-            $get_client =  DB::table('clients')->where('email', $email)->where('phone', $phone)->first();
+            $get_client =  DB::table('clients')->where('email', $email)->where('contact', $phone)->first();
             if($get_client == null){
                 $client = new Client();
                 $client->name = $f_name;
+                $client->last_name  = $l_name;
                 $client->email = $email;
-                $client->phone = $phone;
-                $client->brand_name  =  $brand->id;
-                $client->sender_response  =  json_encode($request->input());
-                $client->is_website = 1;
+                $client->contact = $phone;
+                $client->user_id = null;
+                $client->status = 1;
+                $client->brand_id  =  $brand->id;
+                $client->url = $url;
+                $client->subject = $subject;
+                $client->service = $services;
+                $client->message = $message;
                 $client->created_at = new \DateTime();
                 $client->save();
-                // $this->sendLeadNotification($client->id, 2);
-                return response()->json(['status' => true, 'message' => $client->id, 'email' => $client->email, 'name' => $client->name, 'phone' => $client->phone]);
+
+                $this->sendLeadNotification($client->id, 2);
+                return response()->json(['status' => true, 'message' => $client->id]);
             }else{
-                return response()->json(['status' => true, 'message' => $get_client->id, 'email' => $get_client->email, 'name' => $get_client->name, 'phone' => $get_client->phone]);
+                return response()->json(['status' => false, 'message' => $get_client->id]);
             }
         }else{
             return response()->json(['status' => false, 'message' => 'Error has been Occured']);
@@ -171,7 +127,7 @@ class ApiHomeController extends Controller{
     public function paymentStore(Request $request){
         $return_value = $this->checkAuthBrandKey($request->header('custom-auth'));
         if($return_value){
-            $brand = DB::table('brands')->where('auth_code', $request->header('custom-auth'))->first();
+            $brand = DB::table('brands')->where('auth_key', $request->header('custom-auth'))->first();
             $currencies = DB::table('currencies')->where('sign', $brand->sign)->first();
             $latest = Invoice::latest()->first();
             if (! $latest) {

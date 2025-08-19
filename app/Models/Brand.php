@@ -9,7 +9,20 @@ class Brand extends Model
 {
     use HasFactory;
 
-    public function currency(){
-        return $this->hasOne(Currency::class, 'id', 'currency_id');
+    protected $table = 'brands';
+    protected $fillable = ['name', 'url', 'status', 'logo', 'auth_key', 'phone', 'phone_tel', 'email', 'address', 'address_link', 'sign', 'opt_hide', 'payment_script'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'brand_id');
     }
+
+    public function services(){
+        return $this->hasMany(Service::class);
+    }
+
+    public function merchants(){
+        return $this->belongsToMany(Merchant::class);
+    }
+
 }

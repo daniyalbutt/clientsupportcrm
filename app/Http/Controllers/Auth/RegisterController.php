@@ -49,11 +49,33 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        if($data['is_employee'] == 0){
+
+            return Validator::make($data, [
+                'is_employee' => ['required'],
+                'name' => ['required', 'string', 'max:255'],
+                'last_name' => ['required', 'string', 'max:255'],
+                'contact' => ['required', 'string', 'max:11'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+        }else{
+         
+            return Validator::make($data, [
+                'is_employee' => ['required'],
+                'name' => ['required', 'string', 'max:255'],
+                'last_name' => ['required', 'string', 'max:255'],
+                'res_add' => ['required', 'string', 'max:255'],
+                'contact' => ['required', 'string', 'max:11'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'work_add' => ['required', 'string', 'max:255'],
+                'work_add_lat' => ['required', 'string', 'max:255'],
+                'work_add_log' => ['required', 'string', 'max:255'],
+                'city' => ['required', 'string', 'max:255'],
+                'work_cont' => ['required', 'string', 'max:255'],
+            ]);
+        }
     }
 
     /**
@@ -64,10 +86,34 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        if($data['is_employee'] == 0){
+            return User::create([
+                'is_employee' => $data['is_employee'],
+                'name' => $data['name'],
+                'last_name' => $data['last_name'],
+                'contact' => $data['contact'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+        }else{
+          
+            return User::create([
+                'is_employee' => $data['is_employee'],
+                'name' => $data['name'],
+                'last_name' => $data['last_name'],
+                'contact' => $data['contact'],
+                'email' => $data['email'],
+                'res_add' => $data['res_add'],
+                'work_add' => $data['work_add'],
+                'work_add_lat' => $data['work_add_lat'],
+                'work_add_log' => $data['work_add_log'],
+                'city' => $data['city'],
+                'work_cont' => $data['work_cont'],
+                'password' => Hash::make($data['password']),
+                'status' => 0,
+            ]);
+        }
+        
     }
+
 }

@@ -17,16 +17,18 @@ class RedirectIfAuthenticated
      * @param  string|null  ...$guards
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, ...$guards)
+    public function handle(Request $request, Closure $next, $guard = null)
     {
-        $guards = empty($guards) ? [null] : $guards;
-
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
-            }
+        if (Auth::guard($guard)->check() && auth()->user()->is_employee == 1){
+            return redirect()->route('production.home');
         }
-
+        if(Auth::guard($guard)->check() && auth()->user()->is_employee == 0){
+            return redirect()->route('sale.home');
+        }
+        if(Auth::guard($guard)->check() && auth()->user()->is_employee == 2){
+            return redirect()->route('admin.home');
+        }
+        
         return $next($request);
     }
 }
